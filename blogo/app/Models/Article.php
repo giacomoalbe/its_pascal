@@ -10,4 +10,8 @@ class Article extends Model
     use HasFactory;
 
     public $guarded = [];
+
+    public function author() {
+        return $this->belongsTo(Author::class);
+    }
 }

@@ -5,8 +5,8 @@ Blogo | Crea autore
 @endsection
 
 @section("content")
-<h1 class="font-bold text-blue-800 text-2xl">Crea articolo</h1>
-<form action="/authors" method="POST">
+<h1 class="font-bold text-blue-800 text-2xl">{{ isset($author) ? 'Modifica' : 'Crea'}} autore</h1>
+<form action="/authors{{ isset($author) ? '/'. $author->id : '' }}" method="POST">
     @csrf
     <div class="flex flex-col pt-5 space-y-2">
         <div class="flex flex-col">
@@ -17,7 +17,11 @@ Blogo | Crea autore
                 type="text" 
                 name="name" 
                 id="name"
+            @if (isset($author)) 
+                value="{{ old("name") ? old('name') : $author->name }}"
+            @else 
                 value="{{ old("name") }}"
+            @endif
             >
             @error('name')
                 <span class="text-red-500 font-bold">
@@ -33,6 +37,11 @@ Blogo | Crea autore
                 type="text" 
                 name="surname" 
                 id="surname"
+            @if (isset($author)) 
+                value="{{ old("surname") ? old('surname') : $author->surname }}"
+            @else 
+                value="{{ old("surname") }}"
+            @endif
             >
             @error('surname')
             <span class="text-red-500 font-bold">
@@ -48,6 +57,11 @@ Blogo | Crea autore
                 type="text" 
                 name="email" 
                 id="email"
+            @if (isset($author)) 
+                value="{{ old("email") ? old('email') : $author->email }}"
+            @else 
+                value="{{ old("email") }}"
+            @endif
             >
             @error('email')
             <span class="text-red-500 font-bold">
@@ -58,7 +72,7 @@ Blogo | Crea autore
         <div class="flex mt-2 justify-end">
             <input 
                 type="submit" 
-                value="Crea" 
+                value="{{ isset($author) ? 'Modifica' : 'Crea' }}" 
                 class="cursor-pointer outline-none hover:bg-green-600 bg-green-400 rounded p-2 text-white text-sm">
         </div>
     </div>

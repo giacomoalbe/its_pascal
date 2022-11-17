@@ -14,8 +14,11 @@ Blogo | Lista articoli
     </a>
 </div>
 <div class="flex flex-col">
-    @foreach($articles as $article) 
-    <h2><a href="">{{ $article->title }}</a></h2>
+    @foreach($articles as $article)
+    <div class="flex py-3 border-b border-gray-200">
+        <h2 class="mr-auto"><a href="">{{ $article->title }}</a></h2>
+        <button><a href="/articles/edit/{{ $article->id }}">✏️ Modifica</a></button>
+    </div>
     @endforeach
 </div>
 @endsection

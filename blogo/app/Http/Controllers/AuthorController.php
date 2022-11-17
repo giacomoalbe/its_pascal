@@ -17,6 +17,14 @@ class AuthorController extends Controller
         return view("authors.create");
     }
 
+    public function edit($id) {
+        $author = Author::find($id);
+
+        return view("authors.create", [
+            "author" => $author,
+        ]);
+    }
+
     public function store(Request $request) {
         $validatedData = $request->validate([
             "name" => "required",
@@ -25,6 +33,21 @@ class AuthorController extends Controller
         ]);
 
         Author::create($validatedData);
+
+        return redirect("/authors");
+    }
+
+    public function update(Request $request, $id) {
+        $author = Author::find($id);
+
+        $validatedData = $request->validate([
+            "name" => "required",
+            "surname" => "required",
+            "email" => "required|email"
+        ]);
+
+        $author->fill($validatedData);
+        $author->save();
 
         return redirect("/authors");
     }

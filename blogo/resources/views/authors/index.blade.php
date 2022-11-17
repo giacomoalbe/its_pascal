@@ -15,7 +15,10 @@ Blogo | Lista Autori
 </div>
 <div class="flex flex-col">
     @foreach($authors as $author) 
-    <h2><a href="">{{ $author->fullName }}</a></h2>
+    <div class="flex py-3 border-b border-gray-200">
+        <h2 class="mr-auto"><a href="">{{ $author->fullName }}</a></h2>
+        <button><a href="/authors/edit/{{ $author->id }}">✏️ Modifica</a></button>
+    </div>
     @endforeach
 </div>
 @endsection
