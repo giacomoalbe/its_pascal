@@ -12,6 +12,6 @@ class Article extends Model
     public $guarded = [];
 
     public function author() {
-        return $this->belongsTo(Author::class);
+        return $this->belongsTo(User::class);
     }
 }

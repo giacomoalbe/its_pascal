@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
@@ -41,9 +42,10 @@ class ArticleController extends Controller
         $validatedData = $request->validate([
             "title" => "required",
             "slug" => "required|min:10",
-            "author_id" => "required|numeric",
             "content" => "required" 
         ]);
+
+        $validatedData['author_id'] = Auth::user()->id;
 
         // Creare il nuovo post
         Article::create($validatedData);
@@ -59,7 +61,6 @@ class ArticleController extends Controller
         $validatedData = $request->validate([
             "title" => "required",
             "slug" => "required|min:10",
-            "author_id" => "required|numeric",
             "content" => "required" 
         ]);
 

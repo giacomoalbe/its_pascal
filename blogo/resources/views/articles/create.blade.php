@@ -49,24 +49,6 @@ Blogo | {{ isset($article) ? 'Modifica' : 'Crea' }} articolo
         @enderror
         </div>
         <div class="flex flex-col">
-            <label for="author" class="font-bold pb-1">Autore</label>
-            <select 
-                class="outline-none p-1 px-2 rounded border border-blue-200" 
-                name="author_id"
-                id="author">
-                @foreach ($authors as $author)
-                <option 
-                    {{ isset($article->author) && $article->author->id == $author->id ? 'selected' : ''}}   
-                    value="{{ $author->id }}">{{ $author->fullName }}</option>
-                @endforeach                
-            </select>
-            @error('author_id')
-            <span class="text-red-500 font-bold">
-                {{ $message }}
-            </span>
-        @enderror
-        </div>
-        <div class="flex flex-col">
             <label for="content" class="font-bold pb-1">Testo</label>
             <textarea 
                 placeholder="Come fare i soldi con Laravel senza saper programmare. Possibile? Continua dopo la pubblicità" 
